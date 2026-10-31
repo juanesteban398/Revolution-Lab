@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revolution Lab | Sólidos de revolución</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- PANTALLA DE INICIO -->
+<div id="pantallaInicio" class="overlay-inicio">
+    <div class="contenido-inicio">
+
+        <div class="icono-inicio">∫</div>
+
+        <h1>REVOLUTION LAB</h1>
+        <h2>Laboratorio de sólidos de revolución</h2>
+
+        <p>
+            Este simulador académico permite estudiar la formación
+            de sólidos de revolución mediante el método de arandelas
+            del cálculo integral.
+        </p>
+
+        <div class="instrucciones-inicio">
+
+            <h3>¿Cómo funciona?</h3>
+
+            <ol>
+                <li>Escribe una función para el radio exterior.</li>
+                <li>Escribe una función para el radio interior.</li>
+                <li>Establece los límites de integración.</li>
+                <li>Selecciona el eje de revolución: X o Y.</li>
+                <li>Genera el modelo para visualizar las funciones y el sólido.</li>
+                <li>Analiza la integral y el volumen obtenido.</li>
+            </ol>
+
+            <h3>Fundamento matemático</h3>
+
+            <p>
+                El método de arandelas calcula el volumen de un sólido
+                mediante la diferencia entre las áreas de dos círculos
+                concéntricos, integradas a lo largo del intervalo.
+            </p>
+
+            <div class="formula-inicio">
+                V = π ∫ [R(u)² − r(u)²] du
+            </div>
+
+            <p class="nota-inicio">
+                Donde R representa el radio exterior, r el radio
+                interior y u la variable de integración.
+            </p>
+
+        </div>
+
+        <button id="btnIniciarPrograma">
+            Iniciar simulador
+        </button>
+
+    </div>
+</div>
+    <nav class="barra-superior">
+        <div class="marca">∫ REVOLUTION LAB</div>
+        <span id="estadoSistema">● Simulador listo</span>
+    </nav>
+
+    <header>
+        <h1>Laboratorio de sólidos de revolución</h1>
+        <p>Construye un sólido escribiendo sus funciones y observa cómo se transforma al girar alrededor del eje X o del eje Y.</p>
+    </header>
+
+    <main>
+        <section class="panel funciones">
+            <div class="titulo-seccion">
+                <span class="numero">01</span>
+                <div>
+                    <h2>Define las funciones</h2>
+                    <p>Escribe las funciones en términos de la variable seleccionada.</p>
+                </div>
+            </div>
+            <div class="campo">
+    <label for="variableFuncion">Variable de las funciones</label>
+    <select id="variableFuncion">
+        <option value="x">f(x) y g(x)</option>
+        <option value="y">f(y) y g(y)</option>
+    </select>
+</div>
+<small id="descripcionVariable">
+    Las funciones están expresadas en términos de x.
+</small>
+<label id="labelExterior" for="funcionExterior">
+    Función exterior f
+</label>
+            <input id="funcionExterior" class="campo-funcion" type="text" value="4" spellcheck="false"
+                   placeholder="Ej. sqrt(x) + 2">
+            <small>Representa el radio exterior del sólido.</small>
+
+<label id="labelInterior" for="funcionInterior">
+    Función interior g
+</label>
+            <input id="funcionInterior" class="campo-funcion" type="text" value="2" spellcheck="false"
+                   placeholder="Ej. x/2">
+            <small>Representa el radio interior. Puede ser 0 si no hay hueco.</small>
+
+            <div class="limites">
+                <div>
+                    <label for="limiteA">Límite inferior (a)</label>
+                    <input id="limiteA" type="number" value="0" step="any">
+                </div>
+                <div>
+                    <label for="limiteB">Límite superior (b)</label>
+                    <input id="limiteB" type="number" value="10" step="any">
+                </div>
+            </div>
+            <label for="ejeRevolucion">
+    Eje de revolución
+</label>
+
+<select id="ejeRevolucion">
+    <option value="x">Eje X (horizontal)</option>
+    <option value="y">Eje Y (vertical)</option>
+</select>
+
+<small id="descripcionEje">
+    El solido gira alrededor del  eje X.
+</small>
+<small id="descripcionGrafica">
+    Representación de las funciones en el intervalo seleccionado.
+</small>
+
+            <div class="ejemplos">
+                <strong>Ejemplos para probar</strong>
+                <div class="botones-ejemplo">
+                    <button type="button" class="secundario ejemplo" data-f="4" data-g="2" data-a="0" data-b="10">Cilindro hueco</button>
+                    <button type="button" class="secundario ejemplo" data-f="x/2 + 3" data-g="1" data-a="0" data-b="6">Perfil variable</button>
+                    <button type="button" class="secundario ejemplo" data-f="sqrt(x + 1) + 2" data-g="1" data-a="0" data-b="8">Curva</button>
+                </div>
+            </div>
+
+<button type="button" id="btnActualizar" class="principal">
+    Generar sólido y calcular
+</button>
+
+<div id="advertenciaCruces" class="advertencia-cruces" style="display: none;">
+    <strong>Intersecciones detectadas</strong>
+    <p id="textoCruces"></p>
+</div>
+
+<p id="mensajeEstado" class="mensaje" role="status">
+    Modifica las funciones y genera tu sólido.
+</p>
+        </section>
+
+
+
+        <section class="panel calculo">
+            <div class="titulo-seccion">
+                <span class="numero">03</span>
+                <div>
+                    <h2>Modelo matemático</h2>
+                    <p>Método de arandelas.</p>
+                </div>
+            </div>
+<div class="formula" id="formulaVolumen">
+    V = π ∫ₐᵇ [f(x)² − g(x)²] dx
+</div>
+
+<p id="descripcionFormula" class="nota">
+    Integración respecto a x, utilizando el método de arandelas.
+</p>
+            <div class="datos-calculo">
+                <div><span>Integral aproximada</span><strong id="coeficiente">—</strong></div>
+                <div><span>Volumen calculado</span><strong id="volumen">—</strong></div>
+                <div><span>Intervalo</span><strong id="intervalo">[0, 10]</strong></div>
+            </div>
+            <p class="nota">El cálculo se aproxima numéricamente mediante la regla compuesta de Simpson. El resultado se expresa como coeficiente de π y como valor decimal.</p>
+        </section>
+
+        <section class="panel grafica">
+            <div class="titulo-seccion">
+                <span class="numero">04</span>
+                <div>
+                    <h2>Gráfica de las funciones</h2>
+                    <p>Región entre f(x) y g(x) en el intervalo elegido.</p>
+                </div>
+            </div>
+            <div id="grafico"></div>
+        </section>
+
+        <section class="panel modelo">
+            <div class="titulo-seccion">
+                <span class="numero">05</span>
+                <div>
+                    <h2>Modelo tridimensional</h2>
+                    <p>Arrastra para rotar y utiliza la rueda para acercar o alejar.</p>
+                </div>
+            </div>
+            <div id="modelo3D">
+                <div id="mensaje3D">El modelo 3D aparecerá aquí.</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Revolution Lab · Visualización interactiva del método de arandelas</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@13.2.0/lib/browser/math.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

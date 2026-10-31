@@ -1,0 +1,488 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --fondo: #0b1120;
+    --panel: #172338;
+    --panel-secundario: #101b2e;
+    --borde: #2b3b55;
+    --texto: #edf4ff;
+    --texto-suave: #a9bad2;
+    --azul: #3b82f6;
+    --cian: #22d3ee;
+    --verde: #4ade80;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+}
+
+.barra-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 5%;
+    background: #080e1a;
+    border-bottom: 1px solid var(--borde);
+}
+
+.marca {
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--cian);
+}
+
+#estadoSistema {
+    color: var(--verde);
+    font-size: 13px;
+}
+
+header {
+    text-align: center;
+    padding: 38px 20px 28px;
+    background: linear-gradient(135deg, #142541, #101b2e);
+}
+
+header h1 {
+    margin: 0 0 12px;
+    font-size: clamp(26px, 4vw, 38px);
+}
+
+header p {
+    max-width: 760px;
+    margin: auto;
+    color: var(--texto-suave);
+    line-height: 1.6;
+}
+
+main {
+    width: min(1450px, 94%);
+    margin: 28px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+}
+
+.panel {
+    min-width: 0;
+    padding: 24px;
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .16);
+}
+
+.funciones {
+    grid-row: span 2;
+}
+
+.titulo-seccion {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 22px;
+}
+
+.titulo-seccion h2 {
+    margin: 0 0 5px;
+    font-size: 20px;
+}
+
+.titulo-seccion p {
+    margin: 0;
+    color: var(--texto-suave);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.numero {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    border-radius: 10px;
+    background: #1e3a5f;
+    color: #93c5fd;
+    font-weight: bold;
+}
+
+label {
+    display: block;
+    margin: 18px 0 8px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 12px 13px;
+    color: var(--texto);
+    background: var(--panel-secundario);
+    border: 1px solid #40516c;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+}
+
+input:focus {
+    border-color: var(--cian);
+    box-shadow: 0 0 0 2px rgba(34, 211, 238, .12);
+}
+/* =====================================
+   ADVERTENCIA DE INTERSECCIONES
+===================================== */
+
+.advertencia-cruces {
+    margin-top: 15px;
+    padding: 12px;
+    border: 1px solid #eab308;
+    border-radius: 8px;
+    background: rgba(234, 179, 8, 0.10);
+    color: #facc15;
+}
+
+.advertencia-cruces p {
+    margin-bottom: 0;
+    color: #fef3c7;
+    line-height: 1.5;
+}
+
+.campo-funcion {
+    font-family: Consolas, monospace;
+    font-size: 17px !important;
+}
+
+small {
+    display: block;
+    margin-top: 6px;
+    color: var(--texto-suave);
+}
+
+.limites {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.ejemplos {
+    margin: 22px 0;
+    padding: 15px;
+    background: var(--panel-secundario);
+    border-radius: 10px;
+}
+
+.ejemplos strong {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.botones-ejemplo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+button {
+    padding: 11px 15px;
+    border: 0;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: filter .15s, transform .15s;
+}
+
+button:hover {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.principal {
+    width: 100%;
+    padding: 14px;
+    background: var(--azul);
+    font-size: 15px;
+}
+
+.secundario {
+    background: #334967;
+}
+
+.mensaje {
+    min-height: 24px;
+    margin: 14px 0 0;
+    color: var(--texto-suave);
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.mensaje.error {
+    color: #fca5a5;
+}
+
+.mensaje.exito {
+    color: var(--verde);
+}
+
+.objetivo button {
+    margin-top: 16px;
+}
+
+.formula {
+    padding: 22px 12px;
+    margin: 12px 0 20px;
+    border-radius: 10px;
+    background: var(--panel-secundario);
+    color: #93c5fd;
+    text-align: center;
+    font-size: clamp(17px, 2vw, 23px);
+    font-weight: bold;
+}
+
+.datos-calculo {
+    display: grid;
+    gap: 10px;
+}
+
+.datos-calculo div {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 12px;
+    background: var(--panel-secundario);
+    border-radius: 8px;
+}
+
+.datos-calculo span {
+    color: var(--texto-suave);
+    font-size: 13px;
+}
+
+.datos-calculo strong {
+    color: var(--verde);
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.nota {
+    color: var(--texto-suave);
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+#grafico {
+    width: 100%;
+    height: 390px;
+}
+
+#modelo3D {
+    position: relative;
+    width: 100%;
+    height: 470px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #0c1728;
+    cursor: grab;
+}
+
+#modelo3D:active {
+    cursor: grabbing;
+}
+
+#modelo3D canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#mensaje3D {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: var(--texto-suave);
+    pointer-events: none;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    color: var(--texto-suave);
+    font-size: 12px;
+    border-top: 1px solid var(--borde);
+}
+
+@media (max-width: 900px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    .funciones {
+        grid-row: auto;
+    }
+
+    #grafico {
+        height: 340px;
+    }
+
+    #modelo3D {
+        height: 370px;
+    }
+}
+
+@media (max-width: 520px) {
+    .barra-superior {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .panel {
+        padding: 17px;
+    }
+
+    .limites {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .datos-calculo div {
+        flex-direction: column;
+    }
+
+    .datos-calculo strong {
+        text-align: left;
+    }
+}
+/* =====================================
+   PANTALLA DE INICIO
+===================================== */
+
+.overlay-inicio {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: rgba(3, 8, 20, 0.97);
+    overflow-y: auto;
+}
+
+.contenido-inicio {
+    width: 100%;
+    max-width: 760px;
+
+    padding: 35px;
+
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 18px;
+
+    text-align: center;
+    box-shadow: 0 15px 50px rgba(0,0,0,.35);
+}
+
+.icono-inicio {
+    font-size: 65px;
+    color: var(--cian);
+    font-weight: bold;
+}
+
+.contenido-inicio h1 {
+    color: var(--cian);
+    letter-spacing: 3px;
+}
+
+.contenido-inicio h2 {
+    font-size: 21px;
+}
+
+.contenido-inicio p {
+    color: var(--texto-suave);
+    line-height: 1.7;
+}
+
+.instrucciones-inicio {
+    margin: 25px 0;
+    padding: 20px;
+
+    background: var(--panel-secundario);
+    border-radius: 12px;
+
+    text-align: left;
+}
+
+.instrucciones-inicio li {
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.instrucciones-inicio h3 {
+    color: var(--cian);
+}
+
+.formula-inicio {
+    padding: 18px;
+    margin: 15px 0;
+
+    background: #1e3a5f;
+    border-radius: 10px;
+
+    color: #93c5fd;
+    text-align: center;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.nota-inicio {
+    font-size: 12px;
+}
+
+#btnIniciarPrograma {
+    width: 100%;
+    padding: 15px;
+
+    background: var(--azul);
+    font-size: 16px;
+}
+
+/* =====================================
+   SELECTOR DEL EJE DE REVOLUCIÓN
+===================================== */
+
+select {
+    width: 100%;
+    padding: 12px;
+
+    color: var(--texto);
+    background: var(--panel-secundario);
+
+    border: 1px solid #40516c;
+    border-radius: 8px;
+
+    font-size: 15px;
+    outline: none;
+}
+
+select:focus {
+    border-color: var(--cian);
+    box-shadow: 0 0 0 2px rgba(34, 211, 238, .12);
+}
